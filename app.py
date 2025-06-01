@@ -12,6 +12,16 @@ import io
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Serverul Flask funcționează pe Render!"
+
+if __name__ == "__main__":
+    # Ia portul din variabila de mediu PORT, dacă nu există folosește 5000
+    port = int(os.environ.get("PORT", 5000))
+    # Pornește serverul pe host 0.0.0.0 și pe portul din variabilă
+    app.run(host="0.0.0.0", port=port)
+    
 app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key-change-in-production")
 
 def get_db_connection():
